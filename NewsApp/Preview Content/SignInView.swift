@@ -15,7 +15,7 @@ struct SignInView: View {
         NavigationView {
             ZStack {
                 // Background gradient
-                LinearGradient(gradient: Gradient(colors: [Color.blue, Color.white]),
+                LinearGradient(gradient: Gradient(colors: [Color.white, Color.yellow]),
                                startPoint: .top,
                                endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
@@ -51,10 +51,10 @@ struct SignInView: View {
                     }) {
                         Text("Sign In")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .padding()
                             .frame(width: 200, height: 50)
-                            .background(Color.blue)
+                            .background(Color.yellow)
                             .cornerRadius(10)
                             .shadow(radius: 10)
                     }
@@ -64,7 +64,7 @@ struct SignInView: View {
                     NavigationLink(destination: SignUpView()) {
                         Text("Don't have an account? Sign Up")
                             .font(.subheadline)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.black)
                     }
                     .padding(.top, 10)
 
