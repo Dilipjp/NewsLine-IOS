@@ -1,29 +1,31 @@
-//
-//  SplashView.swift
-//  NewsApp
-//
-//  Created by Dilip on 2024-06-06.
-//
-
 import SwiftUI
 
 struct SplashView: View {
     var body: some View {
-        VStack {
-                    Image(systemName: "app.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)
-                        .padding()
-                    
-                    Text("Welcome to My App")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .padding()
-                }
-                .background(Color.blue)
-                .foregroundColor(.white)
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.blue, Color.white]),
+                           startPoint: .top,
+                           endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                Image("app_icon")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
+                    .padding()
+                    .shadow(color: .gray, radius: 10, x: 0, y: 10)
+                
+                Text("NewsLine")
+                    .foregroundColor(.blue)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding()
+                
+                Spacer()
+            }
+            .padding(.top, 100) 
+        }
     }
 }
 
