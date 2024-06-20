@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841D7ACF2C23D72B0092518E /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D7ACE2C23D72B0092518E /* SignInView.swift */; };
 		84B6A48E2C1175DA00E8506C /* NewsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A48D2C1175DA00E8506C /* NewsAppApp.swift */; };
 		84B6A4902C1175DA00E8506C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A48F2C1175DA00E8506C /* ContentView.swift */; };
 		84B6A4922C1175DD00E8506C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B6A4912C1175DD00E8506C /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		841D7ACE2C23D72B0092518E /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		84B6A48A2C1175DA00E8506C /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B6A48D2C1175DA00E8506C /* NewsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppApp.swift; sourceTree = "<group>"; };
 		84B6A48F2C1175DA00E8506C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				84B6A4942C1175DD00E8506C /* Preview Assets.xcassets */,
+				841D7ACE2C23D72B0092518E /* SignInView.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841D7ACF2C23D72B0092518E /* SignInView.swift in Sources */,
 				84B6A4902C1175DA00E8506C /* ContentView.swift in Sources */,
 				84B6A49C2C11796B00E8506C /* UserModel.swift in Sources */,
 				84B6A4A02C11856700E8506C /* SplashView.swift in Sources */,

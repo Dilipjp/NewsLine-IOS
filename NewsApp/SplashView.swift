@@ -24,7 +24,7 @@ struct SplashView: View {
                 
                 Spacer()
             }
-            .padding(.top, 100) 
+            .padding(.top, 100)
         }
     }
 }
