@@ -12,6 +12,7 @@
 		841D7AD62C23E0D50092518E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 841D7AD52C23E0D50092518E /* FirebaseAuth */; };
 		841D7AD82C23E0D50092518E /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 841D7AD72C23E0D50092518E /* FirebaseDatabase */; };
 		841D7ADB2C23E5090092518E /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D7ADA2C23E5090092518E /* FirebaseService.swift */; };
+		841D7ADD2C23E6120092518E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D7ADC2C23E6120092518E /* MainView.swift */; };
 		84B6A48E2C1175DA00E8506C /* NewsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A48D2C1175DA00E8506C /* NewsAppApp.swift */; };
 		84B6A4902C1175DA00E8506C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A48F2C1175DA00E8506C /* ContentView.swift */; };
 		84B6A4922C1175DD00E8506C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B6A4912C1175DD00E8506C /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		841D7ACE2C23D72B0092518E /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		841D7AD02C23D78C0092518E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		841D7ADA2C23E5090092518E /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		841D7ADC2C23E6120092518E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		84B6A48A2C1175DA00E8506C /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B6A48D2C1175DA00E8506C /* NewsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppApp.swift; sourceTree = "<group>"; };
 		84B6A48F2C1175DA00E8506C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				84B6A4942C1175DD00E8506C /* Preview Assets.xcassets */,
 				841D7ACE2C23D72B0092518E /* SignInView.swift */,
 				841D7AD02C23D78C0092518E /* SignUpView.swift */,
+				841D7ADC2C23E6120092518E /* MainView.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				841D7ACF2C23D72B0092518E /* SignInView.swift in Sources */,
+				841D7ADD2C23E6120092518E /* MainView.swift in Sources */,
 				84B6A4902C1175DA00E8506C /* ContentView.swift in Sources */,
 				841D7ADB2C23E5090092518E /* FirebaseService.swift in Sources */,
 				84B6A49C2C11796B00E8506C /* UserModel.swift in Sources */,
