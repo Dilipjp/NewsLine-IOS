@@ -21,7 +21,7 @@ struct SplashView: View {
                     SignInView()
                 }
             } else {
-                Text("Welcome to MyApp")
+                Text("NewsLine")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .onAppear {
