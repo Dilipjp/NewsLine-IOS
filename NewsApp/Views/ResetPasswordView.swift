@@ -1,18 +1,20 @@
 //
-//  SignUpView.swift
+//  ResetPasswordView.swift
 //  NewsApp
 //
-//  Created by Dilip on 2024-06-20.
+//  Created by Dilip on 2024-06-26.
 //
+
+
+
 import SwiftUI
 import FirebaseAuth
 
-struct SignUpView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
-    @Binding var showSignUp: Bool
+struct ResetPasswordView: View {
+    @Binding var showResetPassword: Bool
     @State private var email = ""
-    @State private var password = ""
     @State private var errorMessage = ""
+    @State private var successMessage = ""
 
     var body: some View {
         ZStack {
@@ -31,25 +33,20 @@ struct SignUpView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(.bottom, 10)
-                                
-                Text("Create an account to stay updated.")
+                
+                Text("Enter your email to receive a password reset link.")
                     .font(.headline)
                     .foregroundColor(.black)
                     .padding(.bottom, 20)
-                
 
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
 
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-
                 Button(action: {
-                    signUp()
+                    resetPassword()
                 }) {
-                    Text("Sign Up")
+                    Text("Reset Password")
                         .font(.headline)
                         .foregroundColor(.yellow)
                         .padding()
@@ -61,47 +58,46 @@ struct SignUpView: View {
 
                 Button(action: {
                     withAnimation {
-                        self.showSignUp = false
+                        self.showResetPassword = false
                     }
                 }) {
-                    Text("Already have an account? Sign In")
+                    Text("Back to Sign In")
                         .font(.subheadline)
                         .foregroundColor(.black)
                         .fontWeight(.bold)
                 }
             }
-            .alert(isPresented: Binding<Bool>(get: { errorMessage != "" }, set: { _ in })) {
-                Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+            .alert(isPresented: Binding<Bool>(get: { errorMessage != "" || successMessage != "" }, set: { _ in })) {
+                Alert(
+                    title: Text(errorMessage.isEmpty ? "Success" : "Error"),
+                    message: Text(errorMessage.isEmpty ? successMessage : errorMessage),
+                    dismissButton: .default(Text("OK"), action: {
+                        errorMessage = ""
+                        successMessage = ""
+                    })
+                )
             }
         }
     }
 
-    func signUp() {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+    func resetPassword() {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
             if let error = error {
                 errorMessage = error.localizedDescription
+                successMessage = ""
             } else {
-                withAnimation {
-                    authViewModel.signIn()
-                    self.showSignUp = false
-                }
-            }
-            DispatchQueue.main.async {
-                // Reset the error message after a short delay
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    errorMessage = ""
-                }
+                successMessage = "A password reset link has been sent to your email."
+                errorMessage = ""
             }
         }
     }
 }
 
-struct SignUpView_Previews: PreviewProvider {
+struct ResetPasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(showSignUp: .constant(false)).environmentObject(AuthViewModel())
+        ResetPasswordView(showResetPassword: .constant(true))
     }
 }
-
 
 
 

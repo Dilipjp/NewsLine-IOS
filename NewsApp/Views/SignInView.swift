@@ -12,6 +12,7 @@ struct SignInView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var showSignUp = false
+    @State private var showResetPassword = false
     @State private var errorMessage = ""
 
     var body: some View {
@@ -30,7 +31,13 @@ struct SignInView: View {
                 Text("NewsLine")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-
+                    .padding(.bottom, 10)
+                                
+                Text("Sign in to access your account")
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .padding(.bottom, 20)
+                
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
@@ -38,6 +45,22 @@ struct SignInView: View {
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
+
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        withAnimation {
+                            self.showResetPassword = true
+                        }
+                    }) {
+                        Text("Forget password ?")
+                            .font(.subheadline)
+                            .foregroundColor(.black)
+                            .fontWeight(.bold)
+                    }
+                }
+                .padding(.trailing, 20)
+                .padding(.bottom, 20)
 
                 Button(action: {
                     signIn()
@@ -70,6 +93,9 @@ struct SignInView: View {
                 SignUpView(showSignUp: self.$showSignUp)
                     .environmentObject(authViewModel)
             }
+            .sheet(isPresented: $showResetPassword) {
+                ResetPasswordView(showResetPassword: self.$showResetPassword)
+            }
         }
     }
 
@@ -97,6 +123,9 @@ struct SignInView_Previews: PreviewProvider {
         SignInView().environmentObject(AuthViewModel())
     }
 }
+
+
+
 
 
 
