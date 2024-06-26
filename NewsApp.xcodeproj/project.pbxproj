@@ -22,6 +22,7 @@
 		84E1E60B2C24660700DB4F23 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E60A2C24660700DB4F23 /* MainView.swift */; };
 		84E1E60D2C246ABC00DB4F23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E60C2C246ABC00DB4F23 /* ContentView.swift */; };
 		84E1E60F2C246B3E00DB4F23 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E1E60E2C246B3E00DB4F23 /* AuthViewModel.swift */; };
+		CE51F1052C2C72DD00E7B1D8 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51F1042C2C72DD00E7B1D8 /* ResetPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		84E1E60A2C24660700DB4F23 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		84E1E60C2C246ABC00DB4F23 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ../../../../.Trash/ContentView.swift; sourceTree = "<group>"; };
 		84E1E60E2C246B3E00DB4F23 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		CE51F1042C2C72DD00E7B1D8 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				84E1E60C2C246ABC00DB4F23 /* ContentView.swift */,
+				CE51F1042C2C72DD00E7B1D8 /* ResetPasswordView.swift */,
 				84E1E5FC2C24628500DB4F23 /* GoogleService-Info.plist */,
 				841D7AE22C245F810092518E /* Views */,
 				841D7AD92C23E4DD0092518E /* Models */,
@@ -199,6 +202,7 @@
 				84E1E6092C2465E200DB4F23 /* SignUpView.swift in Sources */,
 				84E1E60F2C246B3E00DB4F23 /* AuthViewModel.swift in Sources */,
 				84B6A48E2C1175DA00E8506C /* NewsAppApp.swift in Sources */,
+				CE51F1052C2C72DD00E7B1D8 /* ResetPasswordView.swift in Sources */,
 				841DB6322C2BBB1800C54EC0 /* NewsDetails.swift in Sources */,
 				84E1E6072C2465BD00DB4F23 /* SignInView.swift in Sources */,
 				84E1E6052C24657E00DB4F23 /* SplashView.swift in Sources */,
