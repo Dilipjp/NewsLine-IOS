@@ -13,6 +13,7 @@
 		841DB62E2C2BB0B100C54EC0 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DB62D2C2BB0B100C54EC0 /* RemoteImage.swift */; };
 		841DB6322C2BBB1800C54EC0 /* NewsDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DB6312C2BBB1800C54EC0 /* NewsDetails.swift */; };
 		841DB6362C2BE70900C54EC0 /* NewsAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DB6352C2BE70900C54EC0 /* NewsAddView.swift */; };
+		841DB6382C2C702A00C54EC0 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DB6372C2C702900C54EC0 /* ResetPasswordView.swift */; };
 		84B6A48E2C1175DA00E8506C /* NewsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A48D2C1175DA00E8506C /* NewsAppApp.swift */; };
 		84B6A4922C1175DD00E8506C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B6A4912C1175DD00E8506C /* Assets.xcassets */; };
 		84B6A4952C1175DD00E8506C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B6A4942C1175DD00E8506C /* Preview Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		841DB62D2C2BB0B100C54EC0 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		841DB6312C2BBB1800C54EC0 /* NewsDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetails.swift; sourceTree = "<group>"; };
 		841DB6352C2BE70900C54EC0 /* NewsAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAddView.swift; sourceTree = "<group>"; };
+		841DB6372C2C702900C54EC0 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		84B6A48A2C1175DA00E8506C /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B6A48D2C1175DA00E8506C /* NewsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppApp.swift; sourceTree = "<group>"; };
 		84B6A4912C1175DD00E8506C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				841DB62D2C2BB0B100C54EC0 /* RemoteImage.swift */,
 				841DB6312C2BBB1800C54EC0 /* NewsDetails.swift */,
 				841DB6352C2BE70900C54EC0 /* NewsAddView.swift */,
+				841DB6372C2C702900C54EC0 /* ResetPasswordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				841DB62E2C2BB0B100C54EC0 /* RemoteImage.swift in Sources */,
 				841D7ADB2C23E5090092518E /* FirebaseService.swift in Sources */,
 				84E1E60B2C24660700DB4F23 /* MainView.swift in Sources */,
+				841DB6382C2C702A00C54EC0 /* ResetPasswordView.swift in Sources */,
 				84E1E60D2C246ABC00DB4F23 /* ContentView.swift in Sources */,
 				84E1E6092C2465E200DB4F23 /* SignUpView.swift in Sources */,
 				84E1E60F2C246B3E00DB4F23 /* AuthViewModel.swift in Sources */,

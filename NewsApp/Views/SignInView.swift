@@ -12,6 +12,7 @@ struct SignInView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var showSignUp = false
+    @State private var showResetPassword = false
     @State private var errorMessage = ""
 
     var body: some View {
@@ -62,6 +63,17 @@ struct SignInView: View {
                         .foregroundColor(.black)
                         .fontWeight(.bold)
                 }
+                
+                Button(action: {
+                    withAnimation {
+                        self.showResetPassword = true
+                    }
+                }) {
+                    Text("Forget password?")
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                        .fontWeight(.bold)
+                }
             }
             .alert(isPresented: Binding<Bool>(get: { errorMessage != "" }, set: { _ in })) {
                 Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
@@ -69,6 +81,9 @@ struct SignInView: View {
             .sheet(isPresented: $showSignUp) {
                 SignUpView(showSignUp: self.$showSignUp)
                     .environmentObject(authViewModel)
+            }
+            .sheet(isPresented: $showResetPassword) {
+                ResetPasswordView(showResetPassword: self.$showResetPassword)
             }
         }
     }
@@ -97,6 +112,7 @@ struct SignInView_Previews: PreviewProvider {
         SignInView().environmentObject(AuthViewModel())
     }
 }
+
 
 
 
