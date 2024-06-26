@@ -10,10 +10,27 @@ import FirebaseAuth
 
 class AuthViewModel: ObservableObject {
     @Published var isSignedIn: Bool = false
+    @Published var currentUserEmail: String?
 
     init() {
         self.isSignedIn = Auth.auth().currentUser != nil
+        //fetchCurrentUserEmail()
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+                    if let user = user {
+                        self.currentUserEmail = user.email ?? ""
+                    } else {
+                        self.currentUserEmail = ""
+                    }
+                }
     }
+    
+    func fetchCurrentUserEmail() {
+            if let currentUser = Auth.auth().currentUser {
+                self.currentUserEmail = currentUser.email
+            } else {
+                self.currentUserEmail = nil
+            }
+        }
 
     func signOut() {
         do {
