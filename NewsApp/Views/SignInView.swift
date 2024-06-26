@@ -31,7 +31,13 @@ struct SignInView: View {
                 Text("NewsLine")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-
+                    .padding(.bottom, 10)
+                                
+                Text("Sign in to access your account")
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .padding(.bottom, 20)
+                
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
@@ -39,6 +45,22 @@ struct SignInView: View {
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
+
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        withAnimation {
+                            self.showResetPassword = true
+                        }
+                    }) {
+                        Text("Forget password ?")
+                            .font(.subheadline)
+                            .foregroundColor(.black)
+                            .fontWeight(.bold)
+                    }
+                }
+                .padding(.trailing, 20)
+                .padding(.bottom, 20)
 
                 Button(action: {
                     signIn()
@@ -59,17 +81,6 @@ struct SignInView: View {
                     }
                 }) {
                     Text("Don't have an account? Sign Up")
-                        .font(.subheadline)
-                        .foregroundColor(.black)
-                        .fontWeight(.bold)
-                }
-                
-                Button(action: {
-                    withAnimation {
-                        self.showResetPassword = true
-                    }
-                }) {
-                    Text("Forget password?")
                         .font(.subheadline)
                         .foregroundColor(.black)
                         .fontWeight(.bold)
@@ -112,6 +123,8 @@ struct SignInView_Previews: PreviewProvider {
         SignInView().environmentObject(AuthViewModel())
     }
 }
+
+
 
 
 

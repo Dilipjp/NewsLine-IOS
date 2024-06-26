@@ -30,6 +30,13 @@ struct SignUpView: View {
                 Text("NewsLine")
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                    .padding(.bottom, 10)
+                                
+                Text("Create an account to stay updated.")
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .padding(.bottom, 20)
+                
 
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
