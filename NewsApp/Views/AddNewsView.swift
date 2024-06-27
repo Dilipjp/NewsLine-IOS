@@ -37,57 +37,69 @@ struct AddNewsView: View {
     @State private var isNewsSaved = false // Track if news is saved successfully
     
     var body: some View {
-        VStack {
-            Text("Add News")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding()
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.white, Color.yellow]), startPoint: .topLeading, endPoint: .bottomLeading)
+                .edgesIgnoringSafeArea(.all)
             
-            Form {
-                Section(header: Text("News Details")) {
-                    TextField("Title", text: $title)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+            VStack {
+                Text("Add News")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding()
+                    .foregroundColor(.black) // Set text color to black against the gradient
+                
+                Form {
+                    Section(header: Text("News Details")) {
+                        TextField("Title", text: $title)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.vertical, 8)
+                        
+                        TextField("Date (YYYY-MM-DDTHH:mm:ssZ)", text: $dateString)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.vertical, 8)
+                            .onChange(of: dateString, perform: { value in
+                                self.dateString = formatDate(dateString)
+                            })
+                        
+                        TextField("Image URL", text: $imageUrl)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.vertical, 8)
+                        
+                        TextEditor(text: $content)
+                            .frame(minHeight: 100)
+                            .cornerRadius(8)
+                            .padding(.vertical, 8)
+                    }
                     
-                    TextField("Date (YYYY-MM-DDTHH:mm:ssZ)", text: $dateString)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .onChange(of: dateString, perform: { value in
-                            self.dateString = formatDate(dateString)
-                        })
-                    
-                    TextField("Image URL", text: $imageUrl)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                    TextEditor(text: $content)
-                        .frame(minHeight: 100)
-                        .cornerRadius(5)
+                    Button(action: {
+                        saveNews()
+                    }) {
+                        Text("Save News")
+                            .font(.headline)
+                            .foregroundColor(.yellow)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.black)
+                            .cornerRadius(10)
+                    }
+                    .padding()
+                }
+                .alert(isPresented: $isShowingAlert) {
+                    Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                }
+                .navigationBarTitle("Add News", displayMode: .inline)
+                
+                // Show success message if news is saved
+                if isNewsSaved {
+                    Text("News saved successfully.")
+                        .foregroundColor(.green)
+                        .padding()
                 }
                 
-                Button(action: {
-                    saveNews()
-                }) {
-                    Text("Save News")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                }
-                .padding()
+                Spacer()
             }
-            .alert(isPresented: $isShowingAlert) {
-                Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-            }
-            .navigationBarTitle("Add News", displayMode: .inline)
-            
-            // Show success message if news is saved
-            if isNewsSaved {
-                Text("News saved successfully.")
-                    .foregroundColor(.green)
-                    .padding()
-            }
+            .padding()
         }
-        .padding()
     }
     
     func saveNews() {
@@ -149,6 +161,8 @@ struct AddNewsView_Previews: PreviewProvider {
         AddNewsView()
     }
 }
+
+
 
 
 
