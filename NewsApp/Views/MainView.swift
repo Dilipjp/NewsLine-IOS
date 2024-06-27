@@ -9,7 +9,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-struct NewsArticle: Identifiable {
+struct NewsArticle: Identifiable, Hashable {
     let id: String
     let title: String
     let date: Date
@@ -36,6 +36,7 @@ struct NewsArticle: Identifiable {
 struct MainView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var newsArticles: [NewsArticle] = []
+    @State private var navigationPath = NavigationPath()
 
     // Computed property to check if current user is admin
     private var isAdmin: Bool {
@@ -43,30 +44,9 @@ struct MainView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $navigationPath) {
             VStack {
-                Text("Latest News")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
-
-                // Show Add News button only if user is admin
-                if isAdmin {
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            // Action to add news, e.g., navigate to add news screen
-                            print("Add News button tapped")
-                        }) {
-                            Text("Add News")
-                                .font(.headline)
-                                .foregroundColor(.blue)
-                                .padding()
-                        }
-                    }
-                }
-
-                List(newsArticles) { article in
+                List(newsArticles, id: \.self) { article in
                     VStack(alignment: .leading) {
                         RemoteImage(url: article.imageUrl)
                             .aspectRatio(contentMode: .fill)
@@ -110,6 +90,60 @@ struct MainView: View {
             .onAppear {
                 fetchNews()
             }
+            .navigationTitle("Latest News")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Button(action: {
+                            navigationPath.append("Profile")
+                        }) {
+                            Text("Profile")
+                        }
+
+                        Button(action: {
+                            navigationPath.append("About")
+                        }) {
+                            Text("About")
+                        }
+
+                        if isAdmin {
+                            Button(action: {
+                                navigationPath.append("AddNews")
+                            }) {
+                                Text("Add News")
+                            }
+
+                            Button(action: {
+                                navigationPath.append("ViewEditNews")
+                            }) {
+                                Text("View/Edit News")
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .font(.title2)
+                            .foregroundColor(.blue)
+                    }
+                }
+            }
+            .navigationDestination(for: NewsArticle.self) { article in
+                NewsDetailView(article: article)
+            }
+            .navigationDestination(for: String.self) { destination in
+                switch destination {
+                case "Profile":
+                    ProfileView()
+                case "About":
+                    AboutView()
+                case "AddNews":
+                    AddNewsView()
+                case "ViewEditNews":
+                    ViewEditNewsView()
+                default:
+                    EmptyView()
+                }
+            }
         }
     }
 
@@ -126,7 +160,7 @@ struct MainView: View {
             self.newsArticles = newArticles
             // Debugging: Print fetched articles
             for article in newArticles {
-                print("Fetched article: \(article.title), Image URL: \(article.imageUrl)")
+                print("Fetched article: \(article.title)")
             }
         }
     }
@@ -149,6 +183,14 @@ struct MainView_Previews: PreviewProvider {
         MainView().environmentObject(AuthViewModel())
     }
 }
+
+
+
+
+
+
+
+
 
 
 
