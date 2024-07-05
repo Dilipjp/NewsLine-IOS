@@ -1,10 +1,3 @@
-//
-//  SignUpView.swift
-//  NewsApp
-//
-//  Created by Dilip on 2024-06-20.
-//
-
 import SwiftUI
 import Firebase
 
@@ -12,13 +5,19 @@ struct SignUpView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var confirmPassword = ""
+    @State private var username = ""
     @State private var errorMessage = ""
+    @Binding var showSignUp: Bool
     @EnvironmentObject var authViewModel: AuthViewModel
 
     var body: some View {
         VStack {
             Text("Sign Up")
                 .font(.largeTitle)
+                .padding()
+
+            TextField("Username", text: $username)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
 
             TextField("Email", text: $email)
@@ -53,6 +52,18 @@ struct SignUpView: View {
             .padding()
 
             Spacer()
+
+            HStack {
+                Text("Already have an account?")
+                Button(action: {
+                    showSignUp = false
+                }) {
+                    Text("Sign In")
+                        .font(.headline)
+                        .foregroundColor(.blue)
+                }
+            }
+            .padding()
         }
     }
 
@@ -62,10 +73,35 @@ struct SignUpView: View {
             return
         }
 
+        guard !username.isEmpty else {
+            errorMessage = "Username cannot be empty"
+            return
+        }
+
         authViewModel.signUp(email: email, password: password) { result in
             switch result {
             case .success:
-                break
+                if let currentUser = Auth.auth().currentUser {
+                    let changeRequest = currentUser.createProfileChangeRequest()
+                    changeRequest.displayName = username
+                    changeRequest.commitChanges { error in
+                        if let error = error {
+                            self.errorMessage = error.localizedDescription
+                        } else {
+                            // Save user data to Realtime Database
+                            let userRef = Database.database().reference(withPath: "users").child(currentUser.uid)
+                            let userData: [String: Any] = [
+                                "username": username,
+                                "email": email
+                            ]
+                            userRef.setValue(userData) { error, _ in
+                                if let error = error {
+                                    self.errorMessage = error.localizedDescription
+                                }
+                            }
+                        }
+                    }
+                }
             case .failure(let error):
                 errorMessage = error.localizedDescription
             }
@@ -75,7 +111,7 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignUpView(showSignUp: .constant(true))
             .environmentObject(AuthViewModel())
     }
 }

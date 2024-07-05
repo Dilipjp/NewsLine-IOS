@@ -1,10 +1,3 @@
-//
-//  SignInView.swift
-//  NewsApp
-//
-//  Created by Dilip on 2024-06-20.
-//
-
 import SwiftUI
 import Firebase
 
@@ -12,6 +5,10 @@ struct SignInView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage = ""
+    @State private var showPasswordReset = false
+    @State private var resetEmail = ""
+    @State private var resetErrorMessage = ""
+    @Binding var showSignUp: Bool
     @EnvironmentObject var authViewModel: AuthViewModel
 
     var body: some View {
@@ -47,7 +44,31 @@ struct SignInView: View {
             }
             .padding()
 
+            Button(action: {
+                showPasswordReset = true
+            }) {
+                Text("Forgot Password?")
+                    .font(.subheadline)
+                    .foregroundColor(.blue)
+            }
+            .padding(.bottom, 20)
+
             Spacer()
+
+            HStack {
+                Text("Don't have an account?")
+                Button(action: {
+                    showSignUp = true
+                }) {
+                    Text("Sign Up")
+                        .font(.headline)
+                        .foregroundColor(.blue)
+                }
+            }
+            .padding()
+        }
+        .sheet(isPresented: $showPasswordReset) {
+            PasswordResetView(resetEmail: $resetEmail, resetErrorMessage: $resetErrorMessage, showPasswordReset: $showPasswordReset)
         }
     }
 
@@ -65,7 +86,7 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView()
+        SignInView(showSignUp: .constant(false))
             .environmentObject(AuthViewModel())
     }
 }

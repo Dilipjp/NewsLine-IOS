@@ -1,10 +1,3 @@
-//
-//  NewsApp.swift
-//  NewsApp
-//
-//  Created by Dilip on 2024-06-20.
-//
-
 import SwiftUI
 import Firebase
 
@@ -15,13 +8,8 @@ struct NewsApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if authViewModel.isSignedIn {
-                MainView()
-                    .environmentObject(authViewModel)
-            } else {
-                SignInView()
-                    .environmentObject(authViewModel)
-            }
+            SplashView()
+                .environmentObject(authViewModel)
         }
     }
 }

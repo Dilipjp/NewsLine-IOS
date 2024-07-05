@@ -10,6 +10,8 @@
 		841D13DD2C362B64006110CF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13DC2C362B64006110CF /* ContentView.swift */; };
 		841D13DF2C3726DA006110CF /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13DE2C3726DA006110CF /* NewsArticle.swift */; };
 		841D13E52C37298D006110CF /* ViewEditNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13E42C37298D006110CF /* ViewEditNewsView.swift */; };
+		841D13E72C37C30D006110CF /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13E62C37C30D006110CF /* AuthView.swift */; };
+		841D13E92C37C585006110CF /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13E82C37C585006110CF /* PasswordResetView.swift */; };
 		841D7AD62C23E0D50092518E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 841D7AD52C23E0D50092518E /* FirebaseAuth */; };
 		841D7AD82C23E0D50092518E /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 841D7AD72C23E0D50092518E /* FirebaseDatabase */; };
 		841D7ADB2C23E5090092518E /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D7ADA2C23E5090092518E /* FirebaseService.swift */; };
@@ -35,6 +37,8 @@
 		841D13DC2C362B64006110CF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		841D13DE2C3726DA006110CF /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
 		841D13E42C37298D006110CF /* ViewEditNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEditNewsView.swift; sourceTree = "<group>"; };
+		841D13E62C37C30D006110CF /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		841D13E82C37C585006110CF /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		841D7ADA2C23E5090092518E /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		841DB62D2C2BB0B100C54EC0 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		841DB6312C2BBB1800C54EC0 /* NewsDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetails.swift; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 				841DB63B2C2D106300C54EC0 /* AboutView.swift */,
 				841DB63D2C2D107B00C54EC0 /* AddNewsView.swift */,
 				841D13E42C37298D006110CF /* ViewEditNewsView.swift */,
+				841D13E62C37C30D006110CF /* AuthView.swift */,
+				841D13E82C37C585006110CF /* PasswordResetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841D13E92C37C585006110CF /* PasswordResetView.swift in Sources */,
 				841DB62E2C2BB0B100C54EC0 /* RemoteImage.swift in Sources */,
 				841DB63A2C2D103E00C54EC0 /* ProfileView.swift in Sources */,
 				841D13DD2C362B64006110CF /* ContentView.swift in Sources */,
@@ -221,6 +228,7 @@
 				841D13E52C37298D006110CF /* ViewEditNewsView.swift in Sources */,
 				84E1E60B2C24660700DB4F23 /* MainView.swift in Sources */,
 				841DB6382C2C702A00C54EC0 /* ResetPasswordView.swift in Sources */,
+				841D13E72C37C30D006110CF /* AuthView.swift in Sources */,
 				84E1E6092C2465E200DB4F23 /* SignUpView.swift in Sources */,
 				84E1E60F2C246B3E00DB4F23 /* AuthViewModel.swift in Sources */,
 				841D13DF2C3726DA006110CF /* NewsArticle.swift in Sources */,

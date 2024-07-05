@@ -4,6 +4,10 @@ import Firebase
 class AuthViewModel: ObservableObject {
     @Published var currentUser: User?
 
+    init() {
+        self.currentUser = Auth.auth().currentUser
+    }
+
     var isSignedIn: Bool {
         return currentUser != nil
     }
@@ -43,4 +47,3 @@ class AuthViewModel: ObservableObject {
         return currentUser?.email
     }
 }
-

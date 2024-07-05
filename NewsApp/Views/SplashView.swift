@@ -12,7 +12,7 @@ struct SplashView: View {
                     MainView()
                         .environmentObject(authViewModel)
                 } else {
-                    SignInView()
+                    AuthView()
                         .environmentObject(authViewModel)
                 }
             } else {
