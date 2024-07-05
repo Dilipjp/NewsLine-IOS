@@ -1,18 +1,25 @@
-//
-//  AboutView.swift
-//  NewsApp
-//
-//  Created by Dilip on 2024-06-27.
-//
-
 import SwiftUI
 
 struct AboutView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("About NewsLine")
+                .font(.largeTitle)
+                .padding()
+
+            Text("Welcome to NewsLine! Stay updated with the latest news from around the world.")
+                .font(.body)
+                .padding()
+
+            Spacer()
+        }
+        .navigationTitle("About")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-#Preview {
-    AboutView()
+struct AboutView_Previews: PreviewProvider {
+    static var previews: some View {
+        AboutView()
+    }
 }

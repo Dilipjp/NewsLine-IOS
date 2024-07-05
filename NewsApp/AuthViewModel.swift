@@ -1,47 +1,46 @@
-//
-//  AuthViewModel.swift
-//  NewsApp
-//
-//  Created by Dilip on 2024-06-20.
-//
-
 import SwiftUI
-import FirebaseAuth
+import Firebase
 
 class AuthViewModel: ObservableObject {
-    @Published var isSignedIn: Bool = false
-    @Published var currentUserEmail: String?
+    @Published var currentUser: User?
 
-    init() {
-        self.isSignedIn = Auth.auth().currentUser != nil
-        //fetchCurrentUserEmail()
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-                    if let user = user {
-                        self.currentUserEmail = user.email ?? ""
-                    } else {
-                        self.currentUserEmail = ""
-                    }
-                }
+    var isSignedIn: Bool {
+        return currentUser != nil
     }
-    
-    func fetchCurrentUserEmail() {
-            if let currentUser = Auth.auth().currentUser {
-                self.currentUserEmail = currentUser.email
-            } else {
-                self.currentUserEmail = nil
+
+    func signUp(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                completion(.failure(error))
+                return
             }
+            self.currentUser = authResult?.user
+            completion(.success(()))
         }
+    }
+
+    func signIn(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            self.currentUser = authResult?.user
+            completion(.success(()))
+        }
+    }
 
     func signOut() {
         do {
             try Auth.auth().signOut()
-            self.isSignedIn = false
+            currentUser = nil
         } catch let signOutError as NSError {
-            print("Error signing out: \(signOutError.localizedDescription)")
+            print("Error signing out: %@", signOutError)
         }
     }
 
-    func signIn() {
-        self.isSignedIn = true
+    func currentUserEmail() -> String? {
+        return currentUser?.email
     }
 }
+

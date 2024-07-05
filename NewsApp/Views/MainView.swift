@@ -1,9 +1,3 @@
-//
-//  MainView.swift
-//  NewsApp
-//
-//  Created by Dilip on 2024-06-20.
-//
 import SwiftUI
 import Firebase
 import FirebaseAuth
@@ -38,9 +32,12 @@ struct MainView: View {
     @State private var newsArticles: [NewsArticle] = []
     @State private var navigationPath = NavigationPath()
 
-    // Computed property to check if current user is admin
     private var isAdmin: Bool {
-        authViewModel.currentUserEmail == "admin@gmail.com"
+        if let currentUserEmail = authViewModel.currentUserEmail() {
+            return currentUserEmail == "admin@gmail.com"
+        } else {
+            return false
+        }
     }
 
     var body: some View {
@@ -72,20 +69,7 @@ struct MainView: View {
                 }
                 .listStyle(PlainListStyle())
 
-                Spacer()
-
-                Button(action: {
-                    authViewModel.signOut()
-                }) {
-                    Text("Sign Out")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: 200, height: 50)
-                        .background(Color.red)
-                        .cornerRadius(10)
-                }
-                .padding()
+                
             }
             .onAppear {
                 fetchNews()
@@ -114,11 +98,7 @@ struct MainView: View {
                                 Text("Add News")
                             }
 
-                            Button(action: {
-                                navigationPath.append("ViewEditNews")
-                            }) {
-                                Text("View/Edit News")
-                            }
+                           
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
@@ -138,8 +118,6 @@ struct MainView: View {
                     AboutView()
                 case "AddNews":
                     AddNewsView()
-                case "ViewEditNews":
-                    ViewEditNewsView()
                 default:
                     EmptyView()
                 }
@@ -158,7 +136,6 @@ struct MainView: View {
                 }
             }
             self.newsArticles = newArticles
-            // Debugging: Print fetched articles
             for article in newArticles {
                 print("Fetched article: \(article.title)")
             }
@@ -183,22 +160,3 @@ struct MainView_Previews: PreviewProvider {
         MainView().environmentObject(AuthViewModel())
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

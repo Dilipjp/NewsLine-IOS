@@ -1,11 +1,3 @@
-//
-//  NewsDetails.swift
-//  NewsApp
-//
-//  Created by Dilip on 2024-06-26.
-//
-
-import Foundation
 import SwiftUI
 
 struct NewsDetailView: View {
@@ -13,44 +5,30 @@ struct NewsDetailView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading) {
                 RemoteImage(url: article.imageUrl)
                     .aspectRatio(contentMode: .fill)
-                                       .frame(height: 300)
-                                       .clipped()
+                    .frame(height: 300)
+                    .clipped()
 
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(article.title)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.primary)
-                        .padding(.horizontal)
+                Text(article.title)
+                    .font(.largeTitle)
+                    .padding(.vertical, 4)
 
-                    Text(article.date, style: .date)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .padding(.horizontal)
+                Text(article.date, style: .date)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding(.bottom, 4)
 
-                    Divider()
-                        .padding(.horizontal)
-
-                    Text(article.content)
-                        .font(.body)
-                        .foregroundColor(.primary)
-                        .padding([.leading, .trailing, .bottom])
-                }
-                .background(Color(UIColor.systemBackground))
-                .cornerRadius(10)
-                .shadow(radius: 5)
-                .padding([.leading, .trailing, .bottom])
+                Text(article.content)
+                    .font(.body)
+                    .padding(.vertical, 4)
             }
-            .background(Color(UIColor.systemGroupedBackground).edgesIgnoringSafeArea(.all))
+            .padding()
         }
         .navigationTitle("News Details")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
-
-
 
 

@@ -4,115 +4,60 @@
 //
 //  Created by Dilip on 2024-06-20.
 //
+
 import SwiftUI
-import FirebaseAuth
+import Firebase
 
 struct SignInView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var email = ""
     @State private var password = ""
-    @State private var showSignUp = false
-    @State private var showResetPassword = false
     @State private var errorMessage = ""
+    @EnvironmentObject var authViewModel: AuthViewModel
 
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color.white, Color.yellow]), startPoint: .topLeading, endPoint: .bottomLeading)
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                Image("app_icon")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-                    .padding()
-                    .clipShape(Circle())
-                
-                Text("NewsLine")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.bottom, 10)
-                                
-                Text("Sign in to access your account")
-                    .font(.headline)
-                    .foregroundColor(.black)
-                    .padding(.bottom, 20)
-                
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        withAnimation {
-                            self.showResetPassword = true
-                        }
-                    }) {
-                        Text("Forget password ?")
-                            .font(.subheadline)
-                            .foregroundColor(.black)
-                            .fontWeight(.bold)
-                    }
-                }
-                .padding(.trailing, 20)
-                .padding(.bottom, 20)
-
-                Button(action: {
-                    signIn()
-                }) {
-                    Text("Sign In")
-                        .font(.headline)
-                        .foregroundColor(.yellow)
-                        .padding()
-                        .frame(width: 200, height: 50)
-                        .background(Color.black)
-                        .cornerRadius(10)
-                }
+        VStack {
+            Text("Sign In")
+                .font(.largeTitle)
                 .padding()
 
-                Button(action: {
-                    withAnimation {
-                        self.showSignUp = true
-                    }
-                }) {
-                    Text("Don't have an account? Sign Up")
-                        .font(.subheadline)
-                        .foregroundColor(.black)
-                        .fontWeight(.bold)
-                }
+            TextField("Email", text: $email)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+
+            SecureField("Password", text: $password)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding()
             }
-            .alert(isPresented: Binding<Bool>(get: { errorMessage != "" }, set: { _ in })) {
-                Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+
+            Button(action: {
+                signIn()
+            }) {
+                Text("Sign In")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 200, height: 50)
+                    .background(Color.green)
+                    .cornerRadius(10)
             }
-            .sheet(isPresented: $showSignUp) {
-                SignUpView(showSignUp: self.$showSignUp)
-                    .environmentObject(authViewModel)
-            }
-            .sheet(isPresented: $showResetPassword) {
-                ResetPasswordView(showResetPassword: self.$showResetPassword)
-            }
+            .padding()
+
+            Spacer()
         }
     }
 
     func signIn() {
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            if let error = error {
+        authViewModel.signIn(email: email, password: password) { result in
+            switch result {
+            case .success:
+                break
+            case .failure(let error):
                 errorMessage = error.localizedDescription
-            } else {
-                withAnimation {
-                    authViewModel.signIn()
-                }
-            }
-            DispatchQueue.main.async {
-                // Reset the error message after a short delay
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    errorMessage = ""
-                }
             }
         }
     }
@@ -120,12 +65,7 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView().environmentObject(AuthViewModel())
+        SignInView()
+            .environmentObject(AuthViewModel())
     }
 }
-
-
-
-
-
-
