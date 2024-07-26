@@ -12,6 +12,9 @@
 		841D13E52C37298D006110CF /* ViewEditNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13E42C37298D006110CF /* ViewEditNewsView.swift */; };
 		841D13E72C37C30D006110CF /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13E62C37C30D006110CF /* AuthView.swift */; };
 		841D13E92C37C585006110CF /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13E82C37C585006110CF /* PasswordResetView.swift */; };
+		841D13EB2C37C8AE006110CF /* EditNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13EA2C37C8AD006110CF /* EditNewsView.swift */; };
+		841D13EF2C386F36006110CF /* NewsArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13EE2C386F36006110CF /* NewsArticleView.swift */; };
+		841D13F12C3B39DB006110CF /* DeleteNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D13F02C3B39DB006110CF /* DeleteNewsView.swift */; };
 		841D7AD62C23E0D50092518E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 841D7AD52C23E0D50092518E /* FirebaseAuth */; };
 		841D7AD82C23E0D50092518E /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 841D7AD72C23E0D50092518E /* FirebaseDatabase */; };
 		841D7ADB2C23E5090092518E /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D7ADA2C23E5090092518E /* FirebaseService.swift */; };
@@ -39,6 +42,9 @@
 		841D13E42C37298D006110CF /* ViewEditNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEditNewsView.swift; sourceTree = "<group>"; };
 		841D13E62C37C30D006110CF /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		841D13E82C37C585006110CF /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
+		841D13EA2C37C8AD006110CF /* EditNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNewsView.swift; sourceTree = "<group>"; };
+		841D13EE2C386F36006110CF /* NewsArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleView.swift; sourceTree = "<group>"; };
+		841D13F02C3B39DB006110CF /* DeleteNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNewsView.swift; sourceTree = "<group>"; };
 		841D7ADA2C23E5090092518E /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		841DB62D2C2BB0B100C54EC0 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		841DB6312C2BBB1800C54EC0 /* NewsDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetails.swift; sourceTree = "<group>"; };
@@ -98,6 +104,9 @@
 				841D13E42C37298D006110CF /* ViewEditNewsView.swift */,
 				841D13E62C37C30D006110CF /* AuthView.swift */,
 				841D13E82C37C585006110CF /* PasswordResetView.swift */,
+				841D13EA2C37C8AD006110CF /* EditNewsView.swift */,
+				841D13EE2C386F36006110CF /* NewsArticleView.swift */,
+				841D13F02C3B39DB006110CF /* DeleteNewsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -233,8 +242,11 @@
 				84E1E60F2C246B3E00DB4F23 /* AuthViewModel.swift in Sources */,
 				841D13DF2C3726DA006110CF /* NewsArticle.swift in Sources */,
 				841DB63C2C2D106300C54EC0 /* AboutView.swift in Sources */,
+				841D13EF2C386F36006110CF /* NewsArticleView.swift in Sources */,
 				84B6A48E2C1175DA00E8506C /* NewsAppApp.swift in Sources */,
+				841D13EB2C37C8AE006110CF /* EditNewsView.swift in Sources */,
 				841DB6322C2BBB1800C54EC0 /* NewsDetails.swift in Sources */,
+				841D13F12C3B39DB006110CF /* DeleteNewsView.swift in Sources */,
 				84E1E6072C2465BD00DB4F23 /* SignInView.swift in Sources */,
 				841DB6362C2BE70900C54EC0 /* NewsAddView.swift in Sources */,
 				84E1E6052C24657E00DB4F23 /* SplashView.swift in Sources */,

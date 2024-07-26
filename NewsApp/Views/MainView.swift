@@ -3,6 +3,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
+// Model
 struct NewsArticle: Identifiable, Hashable {
     let id: String
     let title: String
@@ -15,10 +16,16 @@ struct NewsArticle: Identifiable, Hashable {
               let title = value["title"] as? String,
               let dateString = value["date"] as? String,
               let imageUrl = value["imageUrl"] as? String,
-              let content = value["content"] as? String,
-              let date = DateFormatter.date(from: dateString) else {
+              let content = value["content"] as? String else {
+            print("Failed to parse news article data")
             return nil
         }
+
+        guard let date = DateFormatter.date(from: dateString) else {
+            print("Failed to parse date string into Date object: \(dateString)")
+            return nil
+        }
+
         self.id = snapshot.key
         self.title = title
         self.date = date
@@ -27,9 +34,31 @@ struct NewsArticle: Identifiable, Hashable {
     }
 }
 
+// ViewModel
+class MainViewModel: ObservableObject {
+    @Published var newsArticles: [NewsArticle] = []
+
+    func fetchNews() {
+        let ref = Database.database().reference(withPath: "news")
+        ref.observe(.value) { snapshot in
+            var newArticles: [NewsArticle] = []
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot {
+                    if let newsArticle = NewsArticle(snapshot: snapshot) {
+                        newArticles.append(newsArticle)
+                    } else {
+                        print("Failed to parse news article from snapshot: \(snapshot)")
+                    }
+                }
+            }
+            self.newsArticles = newArticles
+        }
+    }
+}
+
 struct MainView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State private var newsArticles: [NewsArticle] = []
+    @StateObject private var mainViewModel = MainViewModel()
     @State private var navigationPath = NavigationPath()
 
     private var isAdmin: Bool {
@@ -43,12 +72,15 @@ struct MainView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             VStack {
-                List(newsArticles, id: \.self) { article in
+                List(mainViewModel.newsArticles, id: \.self) { article in
                     VStack(alignment: .leading) {
                         RemoteImage(url: article.imageUrl)
                             .aspectRatio(contentMode: .fill)
                             .frame(height: 300)
                             .clipped()
+                            .onTapGesture {
+                                // Do nothing on image tap
+                            }
                         Text(article.title)
                             .font(.headline)
                             .padding(.vertical, 4)
@@ -58,21 +90,36 @@ struct MainView: View {
                             .foregroundColor(.gray)
                             .padding(.bottom, 4)
 
-                        NavigationLink(destination: NewsDetailView(article: article)) {
-                            Text("View More")
-                                .font(.subheadline)
-                                .foregroundColor(.blue)
-                                .padding(.top, 4)
+                        HStack {
+                            NavigationLink(destination: NewsDetailView(article: article)) {
+                                Text("View More")
+                                    .font(.subheadline)
+                                    .foregroundColor(.blue)
+                                    .padding(.top, 4)
+                            }
+
+                            if isAdmin {
+                                Spacer()
+                                NavigationLink(destination: EditNewsView(article: article)) {
+                                    Text("Edit")
+                                        .foregroundColor(.blue)
+                                        .padding(.top, 4)
+                                }
+                                Spacer()
+                                NavigationLink(destination: DeleteNewsView(article: article).environmentObject(mainViewModel)) {
+                                    Text("Delete")
+                                        .foregroundColor(.red)
+                                        .padding(.top, 4)
+                                }
+                            }
                         }
                     }
                     .padding()
                 }
                 .listStyle(PlainListStyle())
-
-                
             }
             .onAppear {
-                fetchNews()
+                mainViewModel.fetchNews()
             }
             .navigationTitle("Latest News")
             .navigationBarTitleDisplayMode(.inline)
@@ -97,8 +144,6 @@ struct MainView: View {
                             }) {
                                 Text("Add News")
                             }
-
-                           
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
@@ -106,9 +151,6 @@ struct MainView: View {
                             .foregroundColor(.blue)
                     }
                 }
-            }
-            .navigationDestination(for: NewsArticle.self) { article in
-                NewsDetailView(article: article)
             }
             .navigationDestination(for: String.self) { destination in
                 switch destination {
@@ -124,25 +166,9 @@ struct MainView: View {
             }
         }
     }
-
-    func fetchNews() {
-        let ref = Database.database().reference(withPath: "news")
-        ref.observe(.value) { snapshot in
-            var newArticles: [NewsArticle] = []
-            for child in snapshot.children {
-                if let snapshot = child as? DataSnapshot,
-                   let newsArticle = NewsArticle(snapshot: snapshot) {
-                    newArticles.append(newsArticle)
-                }
-            }
-            self.newsArticles = newArticles
-            for article in newArticles {
-                print("Fetched article: \(article.title)")
-            }
-        }
-    }
 }
 
+// DateFormatter extension
 extension DateFormatter {
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -155,8 +181,11 @@ extension DateFormatter {
     }
 }
 
+// Preview
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView().environmentObject(AuthViewModel())
+        MainView()
+            .environmentObject(AuthViewModel())
     }
 }
+
