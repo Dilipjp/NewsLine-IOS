@@ -97,7 +97,12 @@ struct MainView: View {
                                     .foregroundColor(.blue)
                                     .padding(.top, 4)
                             }
-
+                        }
+                        
+                    }
+                    .padding()
+                    VStack(){
+                        HStack{
                             if isAdmin {
                                 Spacer()
                                 NavigationLink(destination: EditNewsView(article: article)) {
@@ -105,6 +110,14 @@ struct MainView: View {
                                         .foregroundColor(.blue)
                                         .padding(.top, 4)
                                 }
+                               
+                            }
+                        }
+                    }
+                    VStack(){
+                        HStack{
+                            if isAdmin {
+                                
                                 Spacer()
                                 NavigationLink(destination: DeleteNewsView(article: article).environmentObject(mainViewModel)) {
                                     Text("Delete")
@@ -114,7 +127,6 @@ struct MainView: View {
                             }
                         }
                     }
-                    .padding()
                 }
                 .listStyle(PlainListStyle())
             }
