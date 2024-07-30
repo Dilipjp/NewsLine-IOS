@@ -100,8 +100,7 @@ struct MainView: View {
                         }
                         
                     }
-                    .padding()
-                    VStack(){
+                    VStack(alignment: .leading){
                         HStack{
                             if isAdmin {
                                 Spacer()
@@ -114,7 +113,7 @@ struct MainView: View {
                             }
                         }
                     }
-                    VStack(){
+                    VStack(alignment: .leading){
                         HStack{
                             if isAdmin {
                                 
