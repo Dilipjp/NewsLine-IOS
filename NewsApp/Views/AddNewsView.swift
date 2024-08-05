@@ -16,7 +16,7 @@ struct AddNewsView: View {
                 .padding()
 
             Form {
-                Section(header: Text("Title")) {
+                Section(header: Text("Article Title")) {
                     TextField("Enter title", text: $title)
                 }
 
