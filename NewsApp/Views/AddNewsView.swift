@@ -45,7 +45,7 @@ struct AddNewsView: View {
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 200, height: 50)
-                    .background(Color.green)
+                    .background(Color.black)
                     .cornerRadius(10)
             }
             .padding()
