@@ -25,6 +25,7 @@
 		841DB63A2C2D103E00C54EC0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DB6392C2D103E00C54EC0 /* ProfileView.swift */; };
 		841DB63C2C2D106300C54EC0 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DB63B2C2D106300C54EC0 /* AboutView.swift */; };
 		841DB63E2C2D107B00C54EC0 /* AddNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DB63D2C2D107B00C54EC0 /* AddNewsView.swift */; };
+		849151A82C61792100049D77 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849151A72C61792100049D77 /* WeatherManager.swift */; };
 		84B6A48E2C1175DA00E8506C /* NewsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6A48D2C1175DA00E8506C /* NewsAppApp.swift */; };
 		84B6A4922C1175DD00E8506C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B6A4912C1175DD00E8506C /* Assets.xcassets */; };
 		84B6A4952C1175DD00E8506C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B6A4942C1175DD00E8506C /* Preview Assets.xcassets */; };
@@ -53,6 +54,8 @@
 		841DB6392C2D103E00C54EC0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		841DB63B2C2D106300C54EC0 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		841DB63D2C2D107B00C54EC0 /* AddNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewsView.swift; sourceTree = "<group>"; };
+		849151A72C61792100049D77 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
+		849151A92C61812D00049D77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		84B6A48A2C1175DA00E8506C /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B6A48D2C1175DA00E8506C /* NewsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppApp.swift; sourceTree = "<group>"; };
 		84B6A4912C1175DD00E8506C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,6 +133,7 @@
 		84B6A48C2C1175DA00E8506C /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				849151A92C61812D00049D77 /* Info.plist */,
 				84E1E5FC2C24628500DB4F23 /* GoogleService-Info.plist */,
 				841D7AE22C245F810092518E /* Views */,
 				841D7AD92C23E4DD0092518E /* Models */,
@@ -138,6 +142,7 @@
 				84B6A4932C1175DD00E8506C /* Preview Content */,
 				84E1E60E2C246B3E00DB4F23 /* AuthViewModel.swift */,
 				841D13DC2C362B64006110CF /* ContentView.swift */,
+				849151A72C61792100049D77 /* WeatherManager.swift */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 				841D13E92C37C585006110CF /* PasswordResetView.swift in Sources */,
 				841DB62E2C2BB0B100C54EC0 /* RemoteImage.swift in Sources */,
 				841DB63A2C2D103E00C54EC0 /* ProfileView.swift in Sources */,
+				849151A82C61792100049D77 /* WeatherManager.swift in Sources */,
 				841D13DD2C362B64006110CF /* ContentView.swift in Sources */,
 				841DB63E2C2D107B00C54EC0 /* AddNewsView.swift in Sources */,
 				841D7ADB2C23E5090092518E /* FirebaseService.swift in Sources */,
@@ -385,6 +391,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NewsApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsApp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide weather updates";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -413,6 +421,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NewsApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsApp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide weather updates";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

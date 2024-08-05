@@ -37,6 +37,12 @@ struct NewsArticle: Identifiable, Hashable {
 // ViewModel
 class MainViewModel: ObservableObject {
     @Published var newsArticles: [NewsArticle] = []
+    @Published var weather: WeatherResponse?
+        private var weatherManager = WeatherManager()
+
+        init() {
+            weatherManager.$weather.assign(to: &$weather)
+        }
 
     func fetchNews() {
         let ref = Database.database().reference(withPath: "news")
@@ -54,6 +60,7 @@ class MainViewModel: ObservableObject {
             self.newsArticles = newArticles
         }
     }
+   
 }
 
 struct MainView: View {
@@ -72,6 +79,22 @@ struct MainView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             VStack {
+                if let weather = mainViewModel.weather {
+                                    VStack {
+                                        Text("Today's Weather in \(weather.name)")
+                                            .font(.headline)
+                                            .padding(.top)
+
+                                        Text("\(weather.main.temp)°C, \(weather.weather.first?.description.capitalized ?? "")")
+                                            .font(.subheadline)
+                                            .padding(.bottom)
+                                    }
+                                } else {
+                                    Text("Loading weather...")
+                                        .font(.subheadline)
+                                        .padding()
+                                }
+                               
                 List(mainViewModel.newsArticles, id: \.self) { article in
                     VStack(alignment: .leading) {
                         RemoteImage(url: article.imageUrl)
