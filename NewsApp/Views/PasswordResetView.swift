@@ -14,6 +14,8 @@ struct PasswordResetView: View {
     @Binding var showPasswordReset: Bool
 
     var body: some View {
+        
+        
         VStack {
             Text("Reset Password")
                 .font(.largeTitle)

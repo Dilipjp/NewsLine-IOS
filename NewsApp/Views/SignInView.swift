@@ -13,14 +13,16 @@ struct SignInView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [Color.yellow, Color.orange]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .edgesIgnoringSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: [Color.white, Color.yellow]), startPoint: .topLeading, endPoint: .bottomLeading)
+                .edgesIgnoringSafeArea(.all)
 
             VStack {
+                Image("app_icon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
+                    .padding()
+                    .clipShape(Circle())
                 Text("Sign In")
                     .font(.largeTitle)
                     .foregroundColor(.black)
