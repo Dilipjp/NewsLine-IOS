@@ -94,42 +94,41 @@ struct MainView: View {
                             NavigationLink(destination: NewsDetailView(article: article)) {
                                 Text("View More")
                                     .font(.subheadline)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.black)
                                     .padding(.top, 4)
                             }
                         }
                         
                     }
-                    VStack(alignment: .leading){
-                        HStack{
-                            if isAdmin {
-                                NavigationLink(destination: EditNewsView(article: article)) {
-                                    Text("Edit")
-                                        .foregroundColor(.blue)
-                                        .padding(.top, 4)
-                                }
-                               
+                    if isAdmin{
+                        VStack(alignment: .leading){
+                            HStack{
+                                    NavigationLink(destination: EditNewsView(article: article)) {
+                                        Text("Edit")
+                                            .foregroundColor(.blue)
+                                            .padding(.top, 4)
+                                    }
+                            }
+                        }
+                        VStack(alignment: .leading){
+                            HStack{
+                                    NavigationLink(destination: DeleteNewsView(article: article).environmentObject(mainViewModel)) {
+                                        Text("Delete")
+                                            .foregroundColor(.red)
+                                            .padding(.top, 4)
+                                    }
                             }
                         }
                     }
-                    VStack(alignment: .leading){
-                        HStack{
-                            if isAdmin {
-                                NavigationLink(destination: DeleteNewsView(article: article).environmentObject(mainViewModel)) {
-                                    Text("Delete")
-                                        .foregroundColor(.red)
-                                        .padding(.top, 4)
-                                }
-                            }
-                        }
-                    }
+                    
+                    
                 }
                 .listStyle(PlainListStyle())
             }
             .onAppear {
                 mainViewModel.fetchNews()
             }
-            .navigationTitle("Latest News")
+            .navigationTitle("NewsLine")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -156,7 +155,7 @@ struct MainView: View {
                     } label: {
                         Image(systemName: "ellipsis.circle")
                             .font(.title2)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.yellow)
                     }
                 }
             }
