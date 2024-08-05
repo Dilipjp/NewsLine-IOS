@@ -11,59 +11,84 @@ struct SignUpView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
 
     var body: some View {
-        VStack {
-            Text("Sign Up")
-                .font(.largeTitle)
-                .padding()
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.white, Color.yellow]), startPoint: .topLeading, endPoint: .bottomLeading)
+                .edgesIgnoringSafeArea(.all)
 
-            TextField("Username", text: $username)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            SecureField("Confirm Password", text: $confirmPassword)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
+            VStack {
+                Image("app_icon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
                     .padding()
-            }
-
-            Button(action: {
-                signUp()
-            }) {
+                    .clipShape(Circle())
                 Text("Sign Up")
-                    .font(.headline)
-                    .foregroundColor(.white)
+                    .font(.largeTitle)
+                    .foregroundColor(.black)
                     .padding()
-                    .frame(width: 200, height: 50)
-                    .background(Color.green)
+
+                TextField("Username", text: $username)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .background(Color.white)
                     .cornerRadius(10)
-            }
-            .padding()
+                    .padding(.horizontal, 20)
 
-            Spacer()
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal, 20)
 
-            HStack {
-                Text("Already have an account?")
-                Button(action: {
-                    showSignUp = false
-                }) {
-                    Text("Sign In")
-                        .font(.headline)
-                        .foregroundColor(.blue)
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal, 20)
+
+                SecureField("Confirm Password", text: $confirmPassword)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal, 20)
+
+                if !errorMessage.isEmpty {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
                 }
+
+                Button(action: {
+                    signUp()
+                }) {
+                    Text("Sign Up")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 200, height: 50)
+                        .background(Color.black)
+                        .cornerRadius(10)
+                }
+                .padding()
+
+                Spacer()
+
+                HStack {
+                    Text("Already have an account?")
+                        .foregroundColor(.white)
+                    Button(action: {
+                        showSignUp = false
+                    }) {
+                        Text("Sign In")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                    }
+                }
+                .padding()
             }
-            .padding()
         }
     }
 

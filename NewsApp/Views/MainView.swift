@@ -37,6 +37,12 @@ struct NewsArticle: Identifiable, Hashable {
 // ViewModel
 class MainViewModel: ObservableObject {
     @Published var newsArticles: [NewsArticle] = []
+    @Published var weather: WeatherResponse?
+        private var weatherManager = WeatherManager()
+
+        init() {
+            weatherManager.$weather.assign(to: &$weather)
+        }
 
     func fetchNews() {
         let ref = Database.database().reference(withPath: "news")
@@ -54,6 +60,7 @@ class MainViewModel: ObservableObject {
             self.newsArticles = newArticles
         }
     }
+   
 }
 
 struct MainView: View {
@@ -72,6 +79,22 @@ struct MainView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             VStack {
+                if let weather = mainViewModel.weather {
+                                    VStack {
+                                        Text("Today's Weather in \(weather.name)")
+                                            .font(.headline)
+                                            .padding(.top)
+
+                                        Text("\(weather.main.temp)°C, \(weather.weather.first?.description.capitalized ?? "")")
+                                            .font(.subheadline)
+                                            .padding(.bottom)
+                                    }
+                                } else {
+                                    Text("Loading weather...")
+                                        .font(.subheadline)
+                                        .padding()
+                                }
+                               
                 List(mainViewModel.newsArticles, id: \.self) { article in
                     VStack(alignment: .leading) {
                         RemoteImage(url: article.imageUrl)
@@ -94,42 +117,41 @@ struct MainView: View {
                             NavigationLink(destination: NewsDetailView(article: article)) {
                                 Text("View More")
                                     .font(.subheadline)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.black)
                                     .padding(.top, 4)
                             }
                         }
                         
                     }
-                    VStack(alignment: .leading){
-                        HStack{
-                            if isAdmin {
-                                NavigationLink(destination: EditNewsView(article: article)) {
-                                    Text("Edit")
-                                        .foregroundColor(.blue)
-                                        .padding(.top, 4)
-                                }
-                               
+                    if isAdmin{
+                        VStack(alignment: .leading){
+                            HStack{
+                                    NavigationLink(destination: EditNewsView(article: article)) {
+                                        Text("Edit")
+                                            .foregroundColor(.blue)
+                                            .padding(.top, 4)
+                                    }
+                            }
+                        }
+                        VStack(alignment: .leading){
+                            HStack{
+                                    NavigationLink(destination: DeleteNewsView(article: article).environmentObject(mainViewModel)) {
+                                        Text("Delete")
+                                            .foregroundColor(.red)
+                                            .padding(.top, 4)
+                                    }
                             }
                         }
                     }
-                    VStack(alignment: .leading){
-                        HStack{
-                            if isAdmin {
-                                NavigationLink(destination: DeleteNewsView(article: article).environmentObject(mainViewModel)) {
-                                    Text("Delete")
-                                        .foregroundColor(.red)
-                                        .padding(.top, 4)
-                                }
-                            }
-                        }
-                    }
+                    
+                    
                 }
                 .listStyle(PlainListStyle())
             }
             .onAppear {
                 mainViewModel.fetchNews()
             }
-            .navigationTitle("Latest News")
+            .navigationTitle("NewsLine")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -156,7 +178,7 @@ struct MainView: View {
                     } label: {
                         Image(systemName: "ellipsis.circle")
                             .font(.title2)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.yellow)
                     }
                 }
             }

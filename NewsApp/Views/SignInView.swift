@@ -12,60 +12,79 @@ struct SignInView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
 
     var body: some View {
-        VStack {
-            Text("Sign In")
-                .font(.largeTitle)
-                .padding()
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.white, Color.yellow]), startPoint: .topLeading, endPoint: .bottomLeading)
+                .edgesIgnoringSafeArea(.all)
 
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
+            VStack {
+                Image("app_icon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
                     .padding()
-            }
-
-            Button(action: {
-                signIn()
-            }) {
+                    .clipShape(Circle())
                 Text("Sign In")
-                    .font(.headline)
-                    .foregroundColor(.white)
+                    .font(.largeTitle)
+                    .foregroundColor(.black)
                     .padding()
-                    .frame(width: 200, height: 50)
-                    .background(Color.green)
+
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .background(Color.white)
                     .cornerRadius(10)
-            }
-            .padding()
+                    .padding(.horizontal, 20)
 
-            Button(action: {
-                showPasswordReset = true
-            }) {
-                Text("Forgot Password?")
-                    .font(.subheadline)
-                    .foregroundColor(.blue)
-            }
-            .padding(.bottom, 20)
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal, 20)
 
-            Spacer()
-
-            HStack {
-                Text("Don't have an account?")
-                Button(action: {
-                    showSignUp = true
-                }) {
-                    Text("Sign Up")
-                        .font(.headline)
-                        .foregroundColor(.blue)
+                if !errorMessage.isEmpty {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
                 }
+
+                Button(action: {
+                    signIn()
+                }) {
+                    Text("Sign In")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 200, height: 50)
+                        .background(Color.black)
+                        .cornerRadius(10)
+                }
+                .padding()
+
+                Button(action: {
+                    showPasswordReset = true
+                }) {
+                    Text("Forgot Password?")
+                        .font(.subheadline)
+                        .foregroundColor(.white)
+                }
+                .padding(.bottom, 20)
+
+                Spacer()
+
+                HStack {
+                    Text("Don't have an account?")
+                        .foregroundColor(.white)
+                    Button(action: {
+                        showSignUp = true
+                    }) {
+                        Text("Sign Up")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                    }
+                }
+                .padding()
             }
-            .padding()
         }
         .sheet(isPresented: $showPasswordReset) {
             PasswordResetView(resetEmail: $resetEmail, resetErrorMessage: $resetErrorMessage, showPasswordReset: $showPasswordReset)

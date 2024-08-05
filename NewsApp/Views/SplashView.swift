@@ -16,10 +16,17 @@ struct SplashView: View {
                         .environmentObject(authViewModel)
                 }
             } else {
-                Text("NewsLine")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.green)
+                ZStack {
+                    LinearGradient(gradient: Gradient(colors: [Color.white, Color.yellow]), startPoint: .topLeading, endPoint: .bottomLeading)
+                        .edgesIgnoringSafeArea(.all)
+                    Image("app_icon")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                        .padding()
+                        .clipShape(Circle())
+                    
+                }
             }
         }
         .onAppear {
