@@ -16,9 +16,13 @@ struct ProfileView: View {
                             .font(.title)
                             .fontWeight(.bold)
                             .padding()
+                        Text("Email: \(userEmail)")
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .padding()
                     } else {
-                        Text("Welcome Email: \(userEmail)")
-                            .font(.title)
+                        Text("User name")
+                            .font(.subheadline)
                             .fontWeight(.bold)
                             .padding()
                     }
