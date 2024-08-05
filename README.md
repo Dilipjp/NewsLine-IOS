@@ -36,6 +36,6 @@
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/newsline-app.git
+   git clone https://github.com/Dilipjp/NewsLine-IOS.git
    cd newsline-app
    ```
