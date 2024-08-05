@@ -13,9 +13,8 @@ struct SignInView: View {
 
     var body: some View {
         ZStack {
-            // Gradient background
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.green]),
+                gradient: Gradient(colors: [Color.yellow, Color.orange]),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -24,7 +23,7 @@ struct SignInView: View {
             VStack {
                 Text("Sign In")
                     .font(.largeTitle)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .padding()
 
                 TextField("Email", text: $email)
@@ -55,7 +54,7 @@ struct SignInView: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 200, height: 50)
-                        .background(Color.green)
+                        .background(Color.black)
                         .cornerRadius(10)
                 }
                 .padding()
@@ -79,7 +78,7 @@ struct SignInView: View {
                     }) {
                         Text("Sign Up")
                             .font(.headline)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.black)
                     }
                 }
                 .padding()
