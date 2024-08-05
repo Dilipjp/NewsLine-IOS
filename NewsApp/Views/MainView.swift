@@ -100,11 +100,9 @@ struct MainView: View {
                         }
                         
                     }
-                    .padding()
-                    VStack(){
+                    VStack(alignment: .leading){
                         HStack{
                             if isAdmin {
-                                Spacer()
                                 NavigationLink(destination: EditNewsView(article: article)) {
                                     Text("Edit")
                                         .foregroundColor(.blue)
@@ -114,11 +112,9 @@ struct MainView: View {
                             }
                         }
                     }
-                    VStack(){
+                    VStack(alignment: .leading){
                         HStack{
                             if isAdmin {
-                                
-                                Spacer()
                                 NavigationLink(destination: DeleteNewsView(article: article).environmentObject(mainViewModel)) {
                                     Text("Delete")
                                         .foregroundColor(.red)
