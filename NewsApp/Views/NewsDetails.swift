@@ -28,7 +28,13 @@ struct NewsDetailView: View {
         }
         .navigationTitle("News Details")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ShareLink(item: "\(article.title)\n\n\(article.content)") {
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.title2)
+                }
+            }
+        }
     }
 }
-
-
