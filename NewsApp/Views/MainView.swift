@@ -85,7 +85,7 @@ struct MainView: View {
                                             .font(.headline)
                                             .padding(.top)
 
-                                        Text("\(weather.main.temp)°C, \(weather.weather.first?.description.capitalized ?? "")")
+                                        Text("\(String(format: "%.2f", weather.main.temp))°C, \(weather.weather.first?.description.capitalized ?? "")")
                                             .font(.subheadline)
                                             .padding(.bottom)
                                     }
