@@ -30,7 +30,7 @@ struct NewsDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                ShareLink(item: "\(article.title)\n\n\(article.content)") {
+                ShareLink(item: "\( article.imageUrl))\(article.title)\n\n\(article.content)") {
                     Image(systemName: "square.and.arrow.up")
                         .font(.title2)
                 }
