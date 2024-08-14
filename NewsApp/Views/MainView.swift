@@ -161,6 +161,11 @@ struct MainView: View {
                         }) {
                             Text("Profile")
                         }
+                        Button(action: {
+                            navigationPath.append("Bookmark")
+                        }) {
+                            Text("Bookmark")
+                        }
 
                         Button(action: {
                             navigationPath.append("About")
@@ -190,6 +195,8 @@ struct MainView: View {
                     AboutView()
                 case "AddNews":
                     AddNewsView()
+                case "Bookmark":
+                    BookmarkView()
                 default:
                     EmptyView()
                 }
