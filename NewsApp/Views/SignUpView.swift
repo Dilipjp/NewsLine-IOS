@@ -77,7 +77,7 @@ struct SignUpView: View {
                 Spacer()
 
                 HStack {
-                    Text("Already have an account?")
+                    Text("Already have an account ?")
                         .foregroundColor(.white)
                     Button(action: {
                         showSignUp = false
