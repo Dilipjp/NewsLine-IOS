@@ -72,7 +72,7 @@ struct PasswordResetView: View {
                 if let error = error {
                     resetErrorMessage = error.localizedDescription
                 } else {
-                    resetErrorMessage = "A password reset link has been sent to your email."
+                    resetErrorMessage = "A password reset link has been sent to your email"
                 }
             }
         }
