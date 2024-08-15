@@ -64,7 +64,7 @@ struct SignInView: View {
                 Button(action: {
                     showPasswordReset = true
                 }) {
-                    Text("Forgot Password?")
+                    Text("Forgot Password ?")
                         .font(.subheadline)
                         .foregroundColor(.white)
                 }
@@ -73,7 +73,7 @@ struct SignInView: View {
                 Spacer()
 
                 HStack {
-                    Text("Don't have an account?")
+                    Text("Don't have an account ?")
                         .foregroundColor(.white)
                     Button(action: {
                         showSignUp = true
