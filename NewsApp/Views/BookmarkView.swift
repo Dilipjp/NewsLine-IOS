@@ -6,13 +6,27 @@
 //
 
 import SwiftUI
-
+// BookmarkView
 struct BookmarkView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @EnvironmentObject var mainViewModel: MainViewModel
 
-#Preview {
-    BookmarkView()
+    var body: some View {
+        VStack {
+            if mainViewModel.bookmarks.isEmpty {
+                Text("No bookmarks yet.")
+                    .font(.headline)
+                    .padding()
+            } else {
+                List(mainViewModel.bookmarks, id: \.self) { article in
+                    NavigationLink(destination: NewsDetailView(article: article)) {
+                        Text(article.title)
+                            .font(.headline)
+                    }
+                }
+                .listStyle(PlainListStyle())
+            }
+        }
+        .navigationTitle("Bookmarks")
+        .navigationBarTitleDisplayMode(.inline)
+    }
 }

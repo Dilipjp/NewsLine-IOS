@@ -3,6 +3,11 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
+import SwiftUI
+import Firebase
+import FirebaseAuth
+import FirebaseDatabase
+
 // Model
 //struct NewsArticle: Identifiable, Hashable {
 //    let id: String
@@ -38,11 +43,13 @@ import FirebaseDatabase
 class MainViewModel: ObservableObject {
     @Published var newsArticles: [NewsArticle] = []
     @Published var weather: WeatherResponse?
-        private var weatherManager = WeatherManager()
+    @Published var bookmarks: [NewsArticle] = []
+    private var weatherManager = WeatherManager()
 
-        init() {
-            weatherManager.$weather.assign(to: &$weather)
-        }
+    init() {
+        weatherManager.$weather.assign(to: &$weather)
+        fetchBookmarks()
+    }
 
     func fetchNews() {
         let ref = Database.database().reference(withPath: "news")
@@ -60,7 +67,39 @@ class MainViewModel: ObservableObject {
             self.newsArticles = newArticles
         }
     }
-   
+
+    func bookmarkArticle(_ article: NewsArticle) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let ref = Database.database().reference(withPath: "users/\(userId)/bookmarks/\(article.id)")
+        ref.setValue(article.toDictionary())
+    }
+
+    func fetchBookmarks() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let ref = Database.database().reference(withPath: "users/\(userId)/bookmarks")
+        ref.observe(.value) { snapshot in
+            var bookmarks: [NewsArticle] = []
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                   let article = NewsArticle(snapshot: snapshot) {
+                    bookmarks.append(article)
+                }
+            }
+            self.bookmarks = bookmarks
+        }
+    }
+}
+
+// Article Dictionary for Firebase
+extension NewsArticle {
+    func toDictionary() -> [String: Any] {
+        return [
+            "title": title,
+            "date": DateFormatter.dateFormatter.string(from: date),
+            "imageUrl": imageUrl,
+            "content": content
+        ]
+    }
 }
 
 struct MainView: View {
@@ -80,21 +119,21 @@ struct MainView: View {
         NavigationStack(path: $navigationPath) {
             VStack {
                 if let weather = mainViewModel.weather {
-                                    VStack {
-                                        Text("Today's Weather in \(weather.name)")
-                                            .font(.headline)
-                                            .padding(.top)
+                    VStack {
+                        Text("Today's Weather in \(weather.name)")
+                            .font(.headline)
+                            .padding(.top)
 
-                                        Text("\(String(format: "%.2f", weather.main.temp))°C, \(weather.weather.first?.description.capitalized ?? "")")
-                                            .font(.subheadline)
-                                            .padding(.bottom)
-                                    }
-                                } else {
-                                    Text("Loading weather...")
-                                        .font(.subheadline)
-                                        .padding()
-                                }
-                               
+                        Text("\(String(format: "%.2f", weather.main.temp))°C, \(weather.weather.first?.description.capitalized ?? "")")
+                            .font(.subheadline)
+                            .padding(.bottom)
+                    }
+                } else {
+                    Text("Loading weather...")
+                        .font(.subheadline)
+                        .padding()
+                }
+
                 List(mainViewModel.newsArticles, id: \.self) { article in
                     VStack(alignment: .leading) {
                         RemoteImage(url: article.imageUrl)
@@ -114,37 +153,40 @@ struct MainView: View {
                             .padding(.bottom, 4)
 
                         HStack {
-                            NavigationLink(destination: NewsDetailView(article: article)) {
+                            NavigationLink(destination: NewsDetailView(article: article).environmentObject(mainViewModel)) {
                                 Text("View More")
                                     .font(.subheadline)
                                     .foregroundColor(.black)
                                     .padding(.top, 4)
                             }
                         }
+
                         
                     }
-                    if isAdmin{
-                        VStack(alignment: .leading){
-                            HStack{
-                                    NavigationLink(destination: EditNewsView(article: article)) {
-                                        Text("Edit")
-                                            .foregroundColor(.blue)
-                                            .padding(.top, 4)
-                                    }
-                            }
-                        }
-                        VStack(alignment: .leading){
-                            HStack{
-                                    NavigationLink(destination: DeleteNewsView(article: article).environmentObject(mainViewModel)) {
-                                        Text("Delete")
-                                            .foregroundColor(.red)
-                                            .padding(.top, 4)
-                                    }
+                    VStack(){
+                        if isAdmin {
+                            HStack {
+                                NavigationLink(destination: EditNewsView(article: article)) {
+                                    Text("Edit")
+                                        .foregroundColor(.blue)
+                                        .padding(.top, 4)
+                                }
+
+                                
                             }
                         }
                     }
-                    
-                    
+                    VStack(){
+                        if isAdmin {
+                            HStack {
+                                NavigationLink(destination: DeleteNewsView(article: article).environmentObject(mainViewModel)) {
+                                    Text("Delete")
+                                        .foregroundColor(.red)
+                                        .padding(.top, 4)
+                                }
+                            }
+                        }
+                    }
                 }
                 .listStyle(PlainListStyle())
             }
@@ -161,6 +203,7 @@ struct MainView: View {
                         }) {
                             Text("Profile")
                         }
+
                         Button(action: {
                             navigationPath.append("Bookmark")
                         }) {
@@ -196,7 +239,7 @@ struct MainView: View {
                 case "AddNews":
                     AddNewsView()
                 case "Bookmark":
-                    BookmarkView()
+                    BookmarkView().environmentObject(mainViewModel)
                 default:
                     EmptyView()
                 }
@@ -204,6 +247,8 @@ struct MainView: View {
         }
     }
 }
+
+
 
 // DateFormatter extension
 extension DateFormatter {
