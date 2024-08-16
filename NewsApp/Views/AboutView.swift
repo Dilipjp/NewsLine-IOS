@@ -11,7 +11,7 @@ struct AboutView: View {
                     .font(.largeTitle)
                     .padding()
                 
-                Text("Welcome to NewsLine! Stay updated with the latest news from around the world.")
+                Text("Welcome to NewsLine, your go-to source for all the latest updates from around the globe! We’re dedicated to bringing you the most current and comprehensive news coverage, covering a wide range of topics from breaking headlines to in-depth analysis. Stay informed and engaged with real-time updates, insightful reports, and expert opinions on the stories that matter most. Whether you’re interested in global events, local news, or specialized content, NewsLine is here to keep you connected to the world.")
                     .font(.body)
                     .padding()
                 
