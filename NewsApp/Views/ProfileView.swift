@@ -27,7 +27,7 @@ struct ProfileView: View {
                             .padding()
                     }
                 } else {
-                    Text("Not signed in")
+                    Text("Your are not signed in, plesase sign in")
                         .font(.title)
                         .foregroundColor(.black)
                         .padding()
